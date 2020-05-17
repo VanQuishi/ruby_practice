@@ -42,4 +42,14 @@ def substring(string, dictionary)
     p result
 end
 
-substring("Howdy partner, sit down! How's it going?", dictionary)
+option = 1
+
+while option == 1 do
+    puts "Input a word or a sentence: "
+    message = gets.chomp
+
+    substring(message, dictionary)
+
+    print "Continue this session? (Yes - enter 1, No - enter 0): "
+    option = gets.chomp.to_i
+end 
