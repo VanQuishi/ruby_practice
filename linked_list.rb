@@ -12,6 +12,7 @@ class LinkedList
     def initialize()
         @head = Node.new
         @tail = @head
+        @size = 0
     end
 
     def append(value)
@@ -27,7 +28,7 @@ class LinkedList
     end
 
     def prepend(value)
-        temp = NOde.new
+        temp = Node.new
         temp.value = value
         temp.next_node = @head
         @head = temp
@@ -40,25 +41,40 @@ class LinkedList
     end
 
     def head()
-        puts "Value of the first node is #{@head.value}"
+        if @head.value == nil
+            puts "Value of the first node is nil"
+        else
+            puts "Value of the first node is #{@head.value}"
+        end
     end
 
     def tail()
-        puts "Value of the last node is #{@tail.node}"
+        if @tail.value == nil
+            puts "Value of the last node is nil"
+        else
+            puts "Value of the last node is #{@tail.value}"
+        end
     end
 
     def at(index)
-        temp = @head
-        i = 0
-        while (i <= index)
-            temp = temp.next_node
+        if index == @size
+            puts "There is no node at this index"
+            return
+        elsif index == 0
+            temp = @head
+        else
+            temp = @head
+            i = 0
+            while (i < index)
+                temp = temp.next_node
+                i += 1
+            end
         end
-
         puts "Value of node at index #{index} is #{temp.value}"
     end
 
     def pop()
-        temp = head
+        temp = @head
         while (temp.next_node != @tail)
             temp = temp.next_node
         end
@@ -81,6 +97,7 @@ class LinkedList
     end
 
     def find(value)
+        temp = @head
         idx = 0
 
         while (temp != nil)
@@ -92,19 +109,50 @@ class LinkedList
             idx += 1
         end
 
-        return temp
+        return "not found"
     end
 
     def to_s()
         temp = @head
 
-        while (temp != nil)
-            print "(#{temp.value}) ->"
+        while (temp.next_node != nil)
+            print "(#{temp.value}) -> "
+            temp = temp.next_node
         end
 
-        print temp
+        print "(#{temp.value})"
         puts "\n"
     end
 end
 
-#NEED TO TEST THIS CODE!!!
+
+myList = LinkedList.new
+
+myList.head()
+
+myList.append(5)
+myList.append(6)
+
+myList.head()
+myList.tail()
+myList.to_s()
+
+myList.prepend(1)
+myList.to_s()
+myList.size()
+
+myList.at(2)
+myList.at(3)
+
+myList.append(7)
+myList.append(8)
+myList.to_s()
+myList.pop()
+puts "The last node is removed"
+myList.to_s()
+
+p myList.contains?(8)
+p myList.contains?(7)
+
+puts "Looking for the index of 7: #{myList.find(7)}"
+puts "Looking for the index of 2: #{myList.find(2)}"
