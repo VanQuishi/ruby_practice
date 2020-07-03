@@ -8,7 +8,7 @@ end
 
 class LinkedList
     
-    attr_accessor :head, :tail, :size
+    attr_reader :head, :tail, :size
     def initialize()
         @head = Node.new
         @tail = @head
@@ -34,6 +34,51 @@ class LinkedList
         @head = temp
 
         @size += 1
+    end
+
+    def insert_at(value,index)
+        if index < 0 || index > @size
+            puts "Invalid position"
+            return
+        elsif index == 0
+            prepend(value)
+        elsif index == @size
+            append(value)
+        else
+            temp = @head
+            node_added = Node.new
+            node_added.value = value
+
+            i = 0
+            while (i < index - 1)
+                temp = temp.next_node
+                i += 1
+            end
+
+            temp_2 = temp.next_node
+            temp.next_node = node_added
+            node_added.next_node = temp_2
+        end
+        @size += 1
+    end
+
+    def remove_at(index)
+        if index < 0 || index >= @size
+            outs "Invalid position"
+            return
+        else
+            temp = @head
+            i = 0
+            while (i < index - 1)
+                temp = temp.next_node
+                i += 1
+            end
+
+            deleted_node = temp.next_node
+            temp.next_node = deleted_node.next_node
+            deleted_node = nil
+            @size -= 1
+        end
     end
 
     def size()
@@ -81,6 +126,7 @@ class LinkedList
 
         temp.next_node = nil
         @tail = temp
+        @size -= 1
     end
 
     def contains?(value)
@@ -156,3 +202,16 @@ p myList.contains?(7)
 
 puts "Looking for the index of 7: #{myList.find(7)}"
 puts "Looking for the index of 2: #{myList.find(2)}"
+
+myList.insert_at(4,3)
+myList.to_s()
+
+myList.insert_at(-1, -1)
+myList.to_s()
+
+myList.insert_at(12,4)
+myList.to_s()
+
+myList.remove_at(4)
+myList.to_s()
+myList.size()
