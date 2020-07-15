@@ -99,10 +99,12 @@ def caesar_cipher(message, n)
         end
     end
 
-    p new_string
+    #p new_string
+    new_string
 end
 
 #==============================
+=begin
 option = 1
 
 while option == 1 do
@@ -119,3 +121,4 @@ while option == 1 do
     print "Encode another message? (Yes - enter 1, No - enter 0): "
     option = gets.chomp.to_i
 end
+=end

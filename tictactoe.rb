@@ -66,6 +66,7 @@ class Player < GameBoard
 end
 
 #========================
+=begin
 option = 1
 
 while option == 1 do
@@ -171,3 +172,4 @@ while option == 1 do
     end
 
 end
+=end
